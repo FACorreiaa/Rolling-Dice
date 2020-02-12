@@ -18,7 +18,18 @@ class Table extends Component {
       cpuWins: 0
     };
   }
-
+  resultMessage = (player, cpu) => {
+    const playerWins = 'Player won!';
+    const playerLoose = 'Player lost!';
+    const draw = 'Its a draw!';
+    if (player > cpu) {
+      return <Title value={playerWins} />;
+    } else if (cpu > player) {
+      return <Title value={playerLoose} />;
+    } else {
+      return <Title value={draw} />;
+    }
+  };
   render() {
     let { number, playerWins, cpuWins } = this.props.number;
     const buttonTitle = `Let's go!`;
@@ -50,7 +61,11 @@ class Table extends Component {
             </Row>
             <Row>
               <Col>
-                <Title value={buttonTitle} />
+                {number.length > 0 ? (
+                  this.resultMessage(number[0], number[1])
+                ) : (
+                  <Title value={buttonTitle} />
+                )}
                 <Button />
               </Col>
             </Row>
@@ -67,6 +82,7 @@ class Table extends Component {
           <p>{Personal.portfolio}</p>
           <p>{Personal.contact}</p>
           <p>{Personal.email}</p>
+          <p>{Personal.linkedin}</p>
         </Card>
       </div>
     );

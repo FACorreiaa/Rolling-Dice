@@ -11,6 +11,8 @@ import {
   faDiceSix
 } from '@fortawesome/free-solid-svg-icons';
 export class Dice extends Component {
+  //not sure if you want css animations
+  //or using animations from components is ok
   renderSwitch(param) {
     switch (param) {
       case 1:

@@ -1,4 +1,4 @@
-import { GENERATE_NUMBER, PLAYER_RESULT, CPU_RESULT } from '../actions/types';
+import { GENERATE_NUMBER } from '../actions/types';
 
 const initialState = {
   number: [],
@@ -12,8 +12,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         number: action.payload.result,
-        playerWins: action.payload.playerWins,
-        cpuWins: action.payload.cpuWins
+        playerWins: state.playerWins + action.payload.playerWins,
+        cpuWins: state.cpuWins + action.payload.cpuWins
       };
 
     default:
