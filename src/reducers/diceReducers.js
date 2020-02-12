@@ -1,7 +1,8 @@
 import { GENERATE_NUMBER } from '../actions/types';
 
 const initialState = {
-  number: 0
+  playerResult: 0,
+  cpuResult: 0
 };
 
 export default function(state = initialState, action) {
@@ -9,8 +10,10 @@ export default function(state = initialState, action) {
     case GENERATE_NUMBER:
       return {
         ...state,
-        number: action.payload
+        playerResult: action.payload.playerResult,
+        cpuResult: action.payload.cpuResult
       };
+
     default:
       return state;
   }

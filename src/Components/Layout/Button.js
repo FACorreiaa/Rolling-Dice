@@ -1,29 +1,21 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { generateNumber } from '../../actions/diceActions';
 
-class Button extends Component {
-  onClick = () => {
-    this.props.generateNumber();
-  };
-
+export class Dice extends Component {
   render() {
-    return (
-      <div>
-        <button onClick={this.onClick}>Click here</button>
-      </div>
-    );
+    const generateNumber = this.props.generateNumber;
+    return <button onClick={generateNumber}>Click Here</button>;
   }
 }
 
-Button.propTypes = {
+Dice.propTypes = {
   generateNumber: PropTypes.func.isRequired
 };
+
 const mapStateToProps = state => ({
   number: state.number
 });
 
-export default connect(mapStateToProps, {
-  generateNumber
-})(Button);
+export default connect(mapStateToProps, { generateNumber })(Dice);
