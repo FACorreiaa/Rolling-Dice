@@ -1,1 +1,3 @@
 export const GENERATE_NUMBER = 'GENERATE_NUMBER';
+export const PLAYER_RESULT = 'PLAYER_RESULT';
+export const CPU_RESULT = 'CPU_RESULT';

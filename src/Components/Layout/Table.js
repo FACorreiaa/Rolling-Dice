@@ -1,45 +1,85 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { generateNumber } from '../../actions/diceActions';
+import { rollDice } from '../../actions/diceActions';
 import Dice from './Dice';
 import Button from './Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import Title from './Title';
+import * as Personal from '../../util/constants';
 class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      number: 0
+      playerWins: 0,
+      cpuWins: 0
     };
   }
 
-  onClick = () => {
-    this.props.generateNumber();
-    console.log('1');
-  };
-
   render() {
-    console.log('PROPS' + JSON.stringify(this.props.number));
+    let { number, playerWins, cpuWins } = this.props.number;
+    const buttonTitle = `Let's go!`;
+    const playerTitle = 'Player';
+    const cpuTitle = 'CPU';
+    const wins = 'Wins: ';
+    console.log(number);
+    console.log(playerWins);
+    console.log(cpuWins);
+    console.log(this.state);
+
     return (
       <div>
-        {Object.keys(this.props.number).map((num, i) => (
-          <div key={i}>
-            <Dice>{num.playerResult}</Dice>
-            <Dice>{num.cpuResult}</Dice>
-          </div>
-        ))}
-        <Button />
+        <Card style={{ textAlign: 'center' }}>
+          <Container>
+            <Row>
+              <Col>
+                <Title value={playerTitle} />
+                <Dice>{number[0]}</Dice>
+                <Title value={wins} />
+                {playerWins}
+              </Col>
+              <Col>
+                <Title value={cpuTitle} />
+                <Dice>{number[1]}</Dice>
+                <Title value={wins} />
+                {cpuWins}
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Title value={buttonTitle} />
+                <Button />
+              </Col>
+            </Row>
+          </Container>
+        </Card>
+        <Card
+          style={{
+            textAlign: 'left'
+          }}
+        >
+          <h4>{Personal.title}</h4>
+          <p>{Personal.name}</p>
+          <p>{Personal.github}</p>
+          <p>{Personal.portfolio}</p>
+          <p>{Personal.contact}</p>
+          <p>{Personal.email}</p>
+        </Card>
       </div>
     );
   }
 }
 
 Table.propTypes = {
-  generateNumber: PropTypes.func.isRequired
+  rollDice: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   number: state.number
 });
 
 export default connect(mapStateToProps, {
-  generateNumber
+  rollDice
 })(Table);

@@ -1,8 +1,9 @@
-import { GENERATE_NUMBER } from '../actions/types';
+import { GENERATE_NUMBER, PLAYER_RESULT, CPU_RESULT } from '../actions/types';
 
 const initialState = {
-  playerResult: 0,
-  cpuResult: 0
+  number: [],
+  playerWins: 0,
+  cpuWins: 0
 };
 
 export default function(state = initialState, action) {
@@ -10,8 +11,9 @@ export default function(state = initialState, action) {
     case GENERATE_NUMBER:
       return {
         ...state,
-        playerResult: action.payload.playerResult,
-        cpuResult: action.payload.cpuResult
+        number: action.payload.result,
+        playerWins: action.payload.playerWins,
+        cpuWins: action.payload.cpuWins
       };
 
     default:
